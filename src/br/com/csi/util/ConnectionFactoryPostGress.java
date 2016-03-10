@@ -19,7 +19,7 @@ public class ConnectionFactoryPostGress {
 		try {
 
 			Class.forName("org.postgresql.Driver");
-			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/internetc", "postgres", "123");
+			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/internetc", "postgres", "teste001");
 
 		} catch (Exception e) {
 			e.printStackTrace();
