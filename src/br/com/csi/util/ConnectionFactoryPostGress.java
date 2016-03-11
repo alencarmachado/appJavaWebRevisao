@@ -1,15 +1,20 @@
 package br.com.csi.util;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Calendar;
+
+
 
 public class ConnectionFactoryPostGress {
 
 	public static void main(String args[]) {
 		System.out.println("INICA APP");
-		delete();
+		insert();
 		System.out.println("FIM APP");
 
 	}
@@ -19,7 +24,7 @@ public class ConnectionFactoryPostGress {
 		try {
 
 			Class.forName("org.postgresql.Driver");
-			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/internetc", "postgres", "teste001");
+			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tarefas", "postgres", "teste001");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,14 +39,14 @@ public class ConnectionFactoryPostGress {
 		Connection c = null;
 		Statement stmt = null;
 		try {
-			Class.forName("org.postgresql.Driver");
-			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/internetc", "postgres", "123");
+			 
+			c = conexao();
 			System.out.println("Opened database successfully");
 
 			stmt = c.createStatement();
-			String sql = "CREATE TABLE TAREFA " + "(ID INT PRIMARY KEY     NOT NULL,"
-					+ " NAME           VARCHAR(30)    NOT NULL, " + " PRIORIDADE     VARCHAR(30)     NOT NULL, "
-					+ " PRAZO          VARCHAR(30)) ";
+			String sql = "CREATE TABLE TAREFA " + "(ID SERIAL PRIMARY KEY,"
+					+ " DESCRICAO           VARCHAR(30)    NOT NULL, " + " FINALIZADO     BOOLEAN     NOT NULL, "
+					+ " DATAFINALIZACAO  DATE) ";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.close();
@@ -54,26 +59,27 @@ public class ConnectionFactoryPostGress {
 
 	public static void insert() {
 		Connection c = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		try {
 
 			c = conexao();
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
-			stmt = c.createStatement();
-			String sql = "INSERT INTO TAREFA (ID,NAME, PRIORIDADE, PRAZO) " + "VALUES (1, 'Ceva', 'baixa', 'hoje');";
-			stmt.executeUpdate(sql);
-
-			sql = "INSERT INTO TAREFA (ID,NAME, PRIORIDADE, PRAZO) " + "VALUES (2, 'carne', 'media', 'amanha');";
-			stmt.executeUpdate(sql);
-
-			sql = "INSERT INTO TAREFA (ID,NAME, PRIORIDADE, PRAZO) " + "VALUES (3, 'Ceva1', 'baixa', 'hoje1');";
-			stmt.executeUpdate(sql);
-
-			sql = "INSERT INTO TAREFA (ID,NAME, PRIORIDADE, PRAZO) " + "VALUES (4, 'Ceva2', 'baixa', 'hoje2');";
-			stmt.executeUpdate(sql);
-
+			/*stmt = c.createStatement();
+			String sql = "INSERT INTO TAREFA (ID, DESCRICAO, FINALIZADO, DATAFINALIZACAO) " + "VALUES (1, 'Ceva', 'baixa', 'hoje');";
+			stmt.executeUpdate(sql);*/
+			
+			String sql = "INSERT INTO TAREFA (DESCRICAO, FINALIZADO, DATAFINALIZACAO) "
+					+ " values (?,?,?)";
+			
+			stmt = c.prepareStatement(sql);
+			
+			stmt.setString(1, "tomar vinho");
+			stmt.setBoolean(2, true);
+			stmt.setDate(3, new Date(Calendar.getInstance().getTimeInMillis()));
+			stmt.execute();
+			
 			stmt.close();
 			c.commit();
 			c.close();
