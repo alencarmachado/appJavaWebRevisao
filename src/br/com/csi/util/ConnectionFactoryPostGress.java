@@ -15,6 +15,7 @@ public class ConnectionFactoryPostGress {
 	public static void main(String args[]) {
 		System.out.println("INICA APP");
 		insert();
+		//criaTabela();
 		System.out.println("FIM APP");
 
 	}
@@ -24,7 +25,8 @@ public class ConnectionFactoryPostGress {
 		try {
 
 			Class.forName("org.postgresql.Driver");
-			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tarefas", "postgres", "teste001");
+//			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tarefas", "postgres", "teste001");
+			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tarefas", "postgres", "123");
 
 		} catch (Exception e) {
 			e.printStackTrace();
