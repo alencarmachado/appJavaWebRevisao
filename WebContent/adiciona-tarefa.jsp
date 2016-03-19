@@ -1,17 +1,20 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>    
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Adiciona Tarefas</title>
+  	<meta charset="utf-8">
+	<title>Adiciona Tarefas</title>
+	<link href=<c:url value="css/bootstrap.min.css"/> rel="stylesheet"> 
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
+
+	<jsp:include page="cabecalho.jsp" />
 
 	<form action="tarefaController" method="post">
 		<label for="descricaco">Descrição:</label>
@@ -25,6 +28,8 @@
 		<button type="submit">Adicionar</button>
 
 	</form>
+	
+	
 <jsp:useBean id="dao" class="br.com.csi.dao.TarefaDao" />
 <table>
 	<thead><tr> <td>Tarefas</td> </tr></thead>

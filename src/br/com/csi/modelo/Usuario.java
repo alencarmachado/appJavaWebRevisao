@@ -2,9 +2,16 @@ package br.com.csi.modelo;
 
 public class Usuario {
 
+	private int codigo;
 	private String login;
 	private String senha;
 	
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 	public String getLogin() {
 		return login;
 	}
