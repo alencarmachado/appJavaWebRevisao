@@ -2,7 +2,9 @@ package br.com.csi.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,49 +38,69 @@ public class TarefaController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		
-		
-			Tarefa t = new Tarefa();
-			TarefaDao tdao = new TarefaDao();
-			
+			TarefaDao tdao = new TarefaDao();		
 			String descricao = request.getParameter("descricao");
+			String id = request.getParameter("id");
+			String buscarTarefa = request.getParameter("buscarTarefa");
 			
-			if(request.getParameter("descricao") == null){
+			RequestDispatcher dispatcher;
+			String pagina = "/adiciona-tarefa.jsp";
+			
+			if(request.getParameter("id") != null && request.getParameter("buscarTarefa") != null){
+				System.out.println("alterar ... ID = "+id);
 				
-				System.out.println("primeiro acesso...");
+				request.setAttribute("tarefa", tdao.getTarefa(Long.parseLong(id)));
+				request.setAttribute("tarefas", tdao.getTarefas());
+				dispatcher= getServletContext().getRequestDispatcher(pagina);
+				dispatcher.forward(request,response);
 				
-			}else{
-		
+			}else if(request.getParameter("id") == null && request.getParameter("descricao") == null){
+				
+				System.out.println("primeiro acesso...");											
+				
+				request.setAttribute("tarefas", tdao.getTarefas());
+				dispatcher= getServletContext().getRequestDispatcher(pagina);
+				dispatcher.forward(request,response);
+								
+				
+			}else if (request.getParameter("descricao") != null){
+				
 				System.out.println("descrição "+descricao);
+				String id_alterar = request.getParameter("id_alterar");
+				
 				String finalizado = request.getParameter("finalizado");
 				System.out.println("finalizado: "+finalizado);
-				String dataEmTexto = request.getParameter("dataFinalizado");
+				
+				String dataEmTexto = request.getParameter("dataFinalizacao");
+				System.out.println("Data.........: "+dataEmTexto);
+				
 				Calendar dataFinalizado = Calendar.getInstance();;
 								
 				try{
 				java.util.Date data =	new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);			
 				dataFinalizado.setTime(data);
-					
-				System.out.println("..data "+dataFinalizado.getTime().toString());
-				
-				}catch(Exception e){
-					System.out.println("erro na conversão da data");
-				}
-				
-				
+													
+				Tarefa t = new Tarefa();
+				t.setId(Long.parseLong(id_alterar));
 				t.setDescricao(descricao);
 				t.setDataFinalizacao(dataFinalizado);
-				t.setFinalizado(false);
+				t.setFinalizado(Boolean.parseBoolean(finalizado));
 				
 				tdao.adiciona(t);
-				//request.setAttribute("tarefas", tdao.getTarefas());
 
-				
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				request.setAttribute("tarefas", tdao.getTarefas());
+				dispatcher= getServletContext().getRequestDispatcher(pagina);
+				dispatcher.forward(request,response);
 			}
 			
-					response.sendRedirect("adiciona-tarefa.jsp");
+					
 	}
 
+	 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
