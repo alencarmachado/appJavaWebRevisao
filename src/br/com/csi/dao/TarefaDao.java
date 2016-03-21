@@ -15,6 +15,21 @@ import br.com.csi.util.ConnectionFactoryPostGress;
 
 public class TarefaDao {
 
+	
+	public void remove(long id){
+		String sql = "delete from TAREFA where id = ?";
+		Connection c = ConnectionFactoryPostGress.conexao();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = c.prepareStatement(sql);
+			stmt.setLong(1, id);
+			stmt.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public void adiciona(Tarefa t){
 		System.out.println("dentro do adiciona tarefa ........... id:"+t.getId());
 		System.out.println("descrição tarefa....: "+t.getDescricao());
@@ -27,7 +42,7 @@ public class TarefaDao {
 			c = ConnectionFactoryPostGress.conexao();
 			String sql = "";
 			
-			if(t.getId() <= 0){
+			if(t.getId()== null){
 				System.out.println("......... vai adicionar .............");
 				
 				sql = "INSERT INTO TAREFA (DESCRICAO, FINALIZADO, DATAFINALIZACAO) "

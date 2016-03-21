@@ -17,6 +17,7 @@
 </head>
 <body>
 
+
 	<jsp:include page="cabecalho.jsp" />
 
 	<c:choose>
@@ -79,12 +80,13 @@
 			<c:forEach var="tarefa" items="${tarefas}">
 				<tr>
 					<td>${tarefa.descricao}</td>
-					<td>${tarefa.finalizado} - ${tarefa.id}</td>
+					<td>${tarefa.finalizado}</td>
 					<td><fmt:formatDate value="${tarefa.dataFinalizacao.time}"
 							pattern="dd/MM/yyyy" />
 					</td>
 					<td>
 						<a class="btn btn-danger" href="http://localhost:8080/appJavaWebRevisao/tarefaController?buscarTarefa=true&&id=${tarefa.id}">Alterar</a>
+						<a class="btn btn-danger" href="http://localhost:8080/appJavaWebRevisao/tarefaController?removeTarefa=true&&id=${tarefa.id}" >Remover</a>
 					</td>
 				</tr>
 			</c:forEach>

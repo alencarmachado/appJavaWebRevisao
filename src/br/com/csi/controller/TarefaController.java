@@ -37,11 +37,14 @@ public class TarefaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		 
 		
 			TarefaDao tdao = new TarefaDao();		
 			String descricao = request.getParameter("descricao");
 			String id = request.getParameter("id");
+			System.out.println("ID .......... "+id);
 			String buscarTarefa = request.getParameter("buscarTarefa");
+			String removeTarefa = request.getParameter("removeTarefa");
 			
 			RequestDispatcher dispatcher;
 			String pagina = "/adiciona-tarefa.jsp";
@@ -50,6 +53,16 @@ public class TarefaController extends HttpServlet {
 				System.out.println("alterar ... ID = "+id);
 				
 				request.setAttribute("tarefa", tdao.getTarefa(Long.parseLong(id)));
+				request.setAttribute("tarefas", tdao.getTarefas());
+				dispatcher= getServletContext().getRequestDispatcher(pagina);
+				dispatcher.forward(request,response);
+				
+			}else if(request.getParameter("id") != null && request.getParameter("removeTarefa") != null){
+				System.out.println("alterar ... ID = "+id);
+				
+				tdao.remove(Long.parseLong(id));
+				
+				//request.setAttribute("tarefa", tdao.getTarefa(Long.parseLong(id)));
 				request.setAttribute("tarefas", tdao.getTarefas());
 				dispatcher= getServletContext().getRequestDispatcher(pagina);
 				dispatcher.forward(request,response);
@@ -81,7 +94,9 @@ public class TarefaController extends HttpServlet {
 				dataFinalizado.setTime(data);
 													
 				Tarefa t = new Tarefa();
-				t.setId(Long.parseLong(id_alterar));
+				if(!id_alterar.equals("")){
+					t.setId(Long.parseLong(id_alterar));
+				}				
 				t.setDescricao(descricao);
 				t.setDataFinalizacao(dataFinalizado);
 				t.setFinalizado(Boolean.parseBoolean(finalizado));
