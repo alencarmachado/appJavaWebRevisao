@@ -34,7 +34,7 @@
                 </ul>
               </li>
                <li><a href="#">Sobre</a></li>
-              <li><a href="#">Contato</a></li>
+              <li><a href="http://localhost:8080/appJavaWebRevisao/LogoutServlet">LOGOUT</a></li>
             </ul>
             <!-- <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
