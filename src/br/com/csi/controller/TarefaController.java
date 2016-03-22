@@ -47,7 +47,7 @@ public class TarefaController extends HttpServlet {
 			String removeTarefa = request.getParameter("removeTarefa");
 			
 			RequestDispatcher dispatcher;
-			String pagina = "/adiciona-tarefa.jsp";
+			String pagina = "/WEB-INF/jsp/adiciona-tarefa.jsp";
 			
 			if(request.getParameter("id") != null && request.getParameter("buscarTarefa") != null){
 				System.out.println("alterar ... ID = "+id);
