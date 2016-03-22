@@ -51,8 +51,7 @@ public class UsuarioController extends HttpServlet {
 		
 		if(logado){
 		
-			String pagina = "/WEB-INF/jsp/principal.jsp";
-			request.setAttribute("usuario", us);
+			String pagina = "/WEB-INF/jsp/principal.jsp";		
 			request.getSession().setAttribute("usuarioLogado",us);			
 			dispatcher= getServletContext().getRequestDispatcher(pagina);
 			dispatcher.forward(request,response);

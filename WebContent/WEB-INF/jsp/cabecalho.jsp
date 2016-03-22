@@ -12,14 +12,14 @@
             </button>
             <a style="color: blue" class="navbar-brand" href="#">Bem vindo(a) 
             
-            	${usuario.login}
+            	${sessionScope['usuarioLogado'].login }
             
             </a>
           </div><!-- fim navbar -->
           
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="principal.jsp">Home</a></li>
+              <li class="active"><a href="http://localhost:8080/appJavaWebRevisao/WEB-INF/jsp/principal.jsp">Home</a></li>
              
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>

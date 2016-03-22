@@ -35,35 +35,24 @@ public class loginFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-		System.out.println("dentro do doFilter");
-
-		//if(request.getSession().getAttribute("usuarioLogado") != null){
-		//return true;
-		//}
+	public void doFilter(ServletRequest request, ServletResponse response, 
+							FilterChain chain) throws IOException, ServletException {
+		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		System.out.println("req.getRequestURI() .. "+req.getRequestURI());
-		System.out.println("... "+req.getRequestURI().equals("/appJavaWebRevisao/index.jsp"));
 		
 		if(req.getSession().getAttribute("usuarioLogado") == null 
 				&& !req.getRequestURI().equals("/appJavaWebRevisao/index.jsp") 
 				&& !req.getRequestURI().equals("/appJavaWebRevisao/usuarioController")
-				&& !req.getRequestURI().equals("/appJavaWebRevisao/css/bootstrap.css")){
-			// pass the request along the filter chain				 
-			
-			System.out.println("dentro do IF");
+				&& req.getRequestURI().equals(".*(css|jpg|png|gif|js)")){
+							 
+						
 			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
             return;
 			
 		} 
-		chain.doFilter(request, response);	
-		 
-		
-		
+		chain.doFilter(request, response);			 			
 	}
 
 	/**

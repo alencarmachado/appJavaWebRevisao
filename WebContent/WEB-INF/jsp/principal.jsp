@@ -11,9 +11,9 @@
 
 <meta charset="utf-8">
 
-<link href=<c:url value="css/bootstrap.min.css"/> rel="stylesheet">
-<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link href=<c:url value="recursos/css/bootstrap.min.css"/> rel="stylesheet">
+<script type="text/javascript" src="recursos/js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="recursos/js/bootstrap.min.js"></script>
 
 <!-- http://www.tutorialwebdesign.com.br/criando-layout-em-bootstrap-parte1/ -->
 </head>
