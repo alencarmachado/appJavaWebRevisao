@@ -49,7 +49,9 @@ public class loginFilter implements Filter {
 		System.out.println("... "+req.getRequestURI().equals("/appJavaWebRevisao/index.jsp"));
 		
 		if(req.getSession().getAttribute("usuarioLogado") == null 
-				&& !req.getRequestURI().equals("/appJavaWebRevisao/index.jsp") && !req.getRequestURI().equals("/appJavaWebRevisao/usuarioController")){
+				&& !req.getRequestURI().equals("/appJavaWebRevisao/index.jsp") 
+				&& !req.getRequestURI().equals("/appJavaWebRevisao/usuarioController")
+				&& !req.getRequestURI().equals("/appJavaWebRevisao/css/bootstrap.css")){
 			// pass the request along the filter chain				 
 			
 			System.out.println("dentro do IF");
