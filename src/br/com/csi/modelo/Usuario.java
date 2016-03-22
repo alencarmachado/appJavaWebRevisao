@@ -2,6 +2,16 @@ package br.com.csi.modelo;
 
 public class Usuario {
 
+	
+	/*
+	 
+create table usuario(codigo serial, login varchar(30) not null, senha varchar(30) not null, primary key(codigo))
+
+insert into usuario(login, senha) values ('mariana','123')	  
+	  
+	 
+	 * */
+	
 	private int codigo;
 	private String login;
 	private String senha;

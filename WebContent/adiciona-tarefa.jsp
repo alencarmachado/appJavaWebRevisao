@@ -22,7 +22,7 @@
 
 	<c:choose>
 		<c:when test="${tarefa.id != null }">
-			<h2>Alterar Tarefa ${tarefa.id }</h2>
+			<h2>Alterar Tarefa</h2>
 		</c:when>
 		<c:otherwise>
 			Adicionar Tarefa

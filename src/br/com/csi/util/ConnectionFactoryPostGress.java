@@ -19,19 +19,20 @@ public class ConnectionFactoryPostGress {
 		System.out.println("FIM APP");
 
 	}
+	
+	
+//	c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tarefas", "postgres", "123");
 
 	public static Connection conexao() {
 		Connection c = null;
 		try {
 
 			Class.forName("org.postgresql.Driver");
-//			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tarefas", "postgres", "teste001");
-			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tarefas", "postgres", "123");
+			c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/tarefas", "postgres", "teste001");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
 		}
 		System.out.println("Opened database successfully");
 		return c;
@@ -65,13 +66,7 @@ public class ConnectionFactoryPostGress {
 		try {
 
 			c = conexao();
-			c.setAutoCommit(false);
-			System.out.println("Opened database successfully");
-
-			/*stmt = c.createStatement();
-			String sql = "INSERT INTO TAREFA (ID, DESCRICAO, FINALIZADO, DATAFINALIZACAO) " + "VALUES (1, 'Ceva', 'baixa', 'hoje');";
-			stmt.executeUpdate(sql);*/
-			
+		
 			String sql = "INSERT INTO TAREFA (DESCRICAO, FINALIZADO, DATAFINALIZACAO) "
 					+ " values (?,?,?)";
 			
@@ -83,8 +78,6 @@ public class ConnectionFactoryPostGress {
 			stmt.execute();
 			
 			stmt.close();
-			c.commit();
-			c.close();
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
